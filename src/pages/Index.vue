@@ -1,6 +1,6 @@
 <template>
   <Layout>
-    <div>Blank layout</div>
+    <div class="text-green-300">Blank layout</div>
   </Layout>
 </template>
 
