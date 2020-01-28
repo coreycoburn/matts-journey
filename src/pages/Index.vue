@@ -5,8 +5,9 @@
         <g-image src="~/images/matt_with_baseball.png" />
       </div>
       <div class="flex flex-col w-1/2 items-center text-blue-500">
-        <div>
-          <g-image src="~/images/field_of_hope_logo.png" width="200" class="mb-12" />
+        <div class="flex mb-12">
+          <g-image src="~/images/field_of_hope_logo.jpg" class="mr-6" />
+          <g-image src="~/images/brain_cancer_awareness_ribbon.jpg" />
         </div>
         <div class="text-4xl font-bold">
           Sunday, February, 23, 2020
@@ -17,21 +18,26 @@
       </div>
     </div>
     <div class="bg-blue-500 text-blue-100 py-16">
-      <div class="container mx-auto max-w-2xl">
-        <h1>Field of Hope</h1>
-        <div class="font-bold mb-4">TICKETS - $40 per person</div>
-        <p>
-          Come enjoy late afternoon appetizers and sample amazing wines from local wineries.
-          There will be speakers, a silent auction and a live Fund-A-Need to help raise much needed funds for Matt and his family during this difficult time.
-        </p>
-        <p class="mb-8">
-          This event is to help Matt and his family offset some of his medical expenses that are not covered by his insurance and to ease the burden caused by his dramatically reduced income.
-        </p>
-        <div class="text-center">
-          <a href="https://www.eventbrite.com/organizer/pricing" class="bg-gray-200 text-blue-500 shadow uppercase text-3xl font-bold rounded-full px-12 py-4 hover:bg-gray-300">
-            Buy Tickets
-          </a>
+      <div class="flex container mx-auto max-w-5xl">
+        <div class="w-2/3 mb-8 mr-6">
+          <h1>Field of Hope</h1>
+          <div class="font-bold mb-4">TICKETS - $40 per person</div>
+          <p>
+            Come enjoy late afternoon appetizers and sample amazing wines from local wineries.
+            There will be speakers, a silent auction and a live Fund-A-Need to help raise much needed funds for Matt and his family during this difficult time.
+          </p>
+          <p>
+            This event is to help Matt and his family offset some of his medical expenses that are not covered by his insurance and to ease the burden caused by his dramatically reduced income.
+          </p>
         </div>
+        <div class="flex w-1/3 items-center justify-center">
+          <g-image src="~/images/field_of_hope_logo.jpg" class="mr-6 rounded-full border-8 border-gray-400" />
+        </div>
+      </div>
+      <div class="text-center">
+        <a href="https://www.eventbrite.com/organizer/pricing" class="bg-gray-200 text-blue-500 shadow uppercase text-3xl font-bold rounded-full px-12 py-4 hover:bg-gray-300">
+          Buy Tickets
+        </a>
       </div>
     </div>
     <div class="container mx-auto max-w-5xl py-16">
