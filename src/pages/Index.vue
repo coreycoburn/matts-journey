@@ -77,7 +77,7 @@
       </div>
       <div class="italic bg-gray-200 text-center rounded mb-8">* For Logo & name placement, your commitment must be received no later than Tuesday, February 4th</div>
       <div class="text-center">
-        <button class="bg-blue-200 shadow text-gray-100 uppercase text-xl font-bold rounded-full px-8 py-2 hover:bg-blue-300">
+        <button class="button">
           Sponsor Event
         </button>
       </div>
@@ -88,12 +88,12 @@
         <p class="mb-8">You can also assist Matt by making a Cash Donation or provide an item for the Silent Auction.</p>
         <div class="flex">
           <div class="flex w-1/2 justify-center">
-            <button class="bg-blue-200 shadow text-gray-100 uppercase text-xl font-bold rounded-full px-8 py-2 hover:bg-blue-300">
+            <button class="button">
               Make Cash Donation
             </button>
           </div>
           <div class="flex w-1/2 justify-center">
-            <button class="bg-blue-200 shadow text-gray-100 uppercase text-xl font-bold rounded-full px-8 py-2 hover:bg-blue-300">
+            <button class="button">
               Donate Auction Item
             </button>
           </div>
