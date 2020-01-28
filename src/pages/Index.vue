@@ -68,7 +68,7 @@
         </div>
         <div class="w-1/2">
           <div class="font-bold">Sponsorship entitlements:</div>
-          <ul class="list-disc ml-4">
+          <ul class="list-disc ml-5">
             <li>Will receive special recognition at the event.</li>
             <li>Will have their name/logo on display at event and on this website.</li>
             <li>Will include their name on all after event material.</li>
@@ -94,7 +94,7 @@
           </div>
           <div class="flex w-1/2 justify-center">
             <button class="bg-blue-200 shadow text-gray-100 uppercase text-xl font-bold rounded-full px-8 py-2 hover:bg-blue-300">
-              Donation Auction Item
+              Donate Auction Item
             </button>
           </div>
         </div>

@@ -1,7 +1,9 @@
 <template>
-  <div class="text-gray-900 text-lg leading-loose">
+  <div class="flex flex-col text-gray-900 text-lg leading-loose min-h-screen">
     <MattHeader />
-    <slot/>
+    <div class="flex-1">
+      <slot/>
+    </div>
     <MattFooter />
   </div>
 </template>
