@@ -7,3 +7,12 @@
     <g-link to="/sponsors">Sponsors</g-link>
   </nav>
 </template>
+
+<style>
+  a {
+    @apply pb-3;
+  }
+  a.active--exact {
+    @apply font-bold border-b-2 border-blue-500;
+  }
+</style>
