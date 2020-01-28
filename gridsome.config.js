@@ -6,5 +6,7 @@
 
 module.exports = {
   siteName: 'Matt\'s Journey',
-  plugins: []
+  plugins: [{
+    use: 'gridsome-plugin-tailwindcss',
+  }]
 }
