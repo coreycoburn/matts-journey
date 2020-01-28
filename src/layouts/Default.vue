@@ -1,21 +1,8 @@
 <template>
   <div class="text-gray-900 text-lg leading-loose">
-    <header class="container mx-auto mt-8 mb-16">
-      <nav class="text-lg">
-        <g-link to="/" class="mr-12">Help Matt</g-link>
-        <g-link to="/journey" class="mr-12">Matt's Journey</g-link>
-        <g-link to="/brain-cancer-awareness" class="mr-12">Brain Cancer Awareness</g-link>
-        <g-link to="/contact" class="mr-12">Contact</g-link>
-        <g-link to="/sponsors">Sponsors</g-link>
-      </nav>
-    </header>
+    <MattHeader />
     <slot/>
-    <footer class="bg-gray-200 text-base">
-      <div class="flex container mx-auto py-4">
-        <div class="mr-6">&copy; {{ year }} Matt Appleby Brain Cancer Fund</div>
-        <div><a href="mailto:HelpMattAppleby@gmail.com">HelpMattAppleby@gmail.com</a></div>
-      </div>
-    </footer>
+    <MattFooter />
   </div>
 </template>
 
@@ -28,12 +15,14 @@ query {
 </static-query>
 
 <script>
+import MattHeader from './partials/Header'
+import MattFooter from './partials/Footer'
+
 export default {
-  data() {
-    return {
-      year: new Date().getFullYear(),
-    }
-  }
+  components: {
+    MattHeader,
+    MattFooter,
+  },
 }
 </script>
 
