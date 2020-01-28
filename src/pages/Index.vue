@@ -1,5 +1,5 @@
 <template>
-  <Layout>
+  <div>
     <div class="container mx-auto flex">
       <div class="w-1/2">
         <g-image src="~/images/matt_with_baseball.png" />
@@ -110,7 +110,7 @@
         </div>
       </div>
     </div>
-  </Layout>
+  </div>
 </template>
 
 <script>
@@ -120,7 +120,3 @@ export default {
   }
 }
 </script>
-
-<style>
-
-</style>
