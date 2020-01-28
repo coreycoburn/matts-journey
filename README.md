@@ -1,14 +1,10 @@
-# Default starter for Gridsome
+# Help Matt Appleby
 
-This is the project you get when you run `gridsome create new-project`.
+This website was initially made for Matt's Field of Hope Fundraiser on Sunday, February 23, 2020. This event is to help Matt and his family offset some of his medical expenses that are not covered by his insurance and to ease the burden caused by his dramatically reduced income.
 
-### 1. Install Gridsome CLI tool if you don't have
+The Field of Hope page allows attendees to purchase tickets, people to help donate to Matt and his family, as well as be an event sponsor.
 
-`npm install --global @gridsome/cli`
+This website will also be the place for people following Matt's journey to go for updates.
 
-### 2. Create a Gridsome project
-
-1. `gridsome create my-gridsome-site` to install default starter
-2. `cd my-gridsome-site` to open the folder
-3. `gridsome develop` to start a local dev server at `http://localhost:8080`
-4. Happy coding 🎉🙌
+This website was designed and developed by Corey Coburn.
+<https://coburn.codes>
