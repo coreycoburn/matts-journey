@@ -35,7 +35,7 @@
         </div>
       </div>
       <div class="text-center">
-        <a href="https://www.eventbrite.com/organizer/pricing" class="bg-gray-200 text-blue-500 shadow uppercase text-3xl font-bold rounded-full px-12 py-4 hover:bg-gray-300">
+        <a href="https://www.eventbrite.com/e/field-of-hope-a-fundraiser-for-matt-appleby-tickets-91956812301" class="bg-gray-200 text-blue-500 shadow uppercase text-3xl font-bold rounded-full px-12 py-4 hover:bg-gray-300">
           Buy Tickets
         </a>
       </div>
@@ -88,9 +88,7 @@
         <p class="mb-8">You can also assist Matt by making a Cash Donation or provide an item for the Silent Auction.</p>
         <div class="flex">
           <div class="flex w-1/2 justify-center">
-            <button class="button">
-              Make Cash Donation
-            </button>
+            <CashDonation />
           </div>
           <div class="flex w-1/2 justify-center">
             <button class="button">
@@ -114,9 +112,14 @@
 </template>
 
 <script>
+import CashDonation from '~/components/CashDonation'
+
 export default {
   metaInfo: {
     title: 'Hello, world!'
-  }
+  },
+  components: {
+    CashDonation,
+  },
 }
 </script>
