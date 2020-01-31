@@ -14,19 +14,19 @@
               <label for="company" class="text-sm">Company:</label>
               <input v-model="form.company" type="text" id="company" name="company" class="w-full px-2 text-sm leading-loose appearance-none border-2 border-gray-400 bg-gray-200 rounded-lg">
             </div>
-            <div class="flex mb-2">
-              <div class="w-1/2 mr-3">
+            <div class="flex flex-col mb-2 md:flex-row">
+              <div class="w-full mb-2 md:w-1/2 md:mb-0 md:mr-3">
                 <label for="firstName" class="text-sm">First Name: <span class="text-xs text-red-700" v-if="!$v.form.firstName.required">required</span></label>
                 <input v-model="form.firstName" type="text" id="firstName" name="firstName" class="w-full px-2 text-sm leading-loose appearance-none border-2 border-gray-400 bg-gray-200 rounded-lg" aria-required="true">
               </div>
-              <div class="w-1/2">
+              <div class="w-full md:w-1/2">
                 <label for="lastName" class="text-sm">Last Name: <span class="text-xs text-red-700" v-if="!$v.form.lastName.required">required</span></label>
                 <input v-model="form.lastName" type="text" id="lastName" name="lastName" class="w-full px-2 text-sm leading-loose appearance-none border-2 border-gray-400 bg-gray-200 rounded-lg" aria-required="true">
               </div>
             </div>
 
-            <div class="flex mb-2">
-              <div class="w-1/2 mr-3">
+            <div class="flex flex-col mb-2 md:flex-row">
+              <div class="w-full mb-2 md:w-1/2 md:mb-0 md:mr-3">
                 <label for="phone" class="text-sm">
                   Phone:
                   <span class="text-xs text-red-700" v-if="!$v.form.phone.required">required</span>
@@ -34,7 +34,7 @@
                 </label>
                 <input v-model="form.phone" v-mask="'##########'" placeholder="707123456" type="text" id="phone" name="phone" class="w-full px-2 text-sm leading-loose appearance-none border-2 border-gray-400 bg-gray-200 rounded-lg" aria-required="true">
               </div>
-              <div class="w-1/2">
+              <div class="w-full md:w-1/2">
                 <label for="email" class="text-sm">
                   Email:
                   <span class="text-xs text-red-700" v-if="!$v.form.email.required">required</span>

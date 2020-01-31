@@ -13,7 +13,7 @@
         <li><strong>Ruth Appleby:</strong> 707-227-6123</li>
       </ul>
     </div>
-    <form @submit.prevent="submit" method="post" name="contact" action="/thanks" class="mb-8" netlify data-netlify-honeypot="bot-field">
+    <form @submit.prevent="submit" ref="contact" method="post" name="contact" action="/thanks" class="mb-8" netlify data-netlify-honeypot="bot-field">
       <input type="hidden" name="form-name" value="contact" />
       <div>
         <label for="name" class="text-base">Name:</label>
@@ -86,7 +86,7 @@ export default {
   },
   methods: {
     submit() {
-      console.log('submitting')
+      this.$refs.contact.submit()
     },
   },
 }
