@@ -1,7 +1,7 @@
 <template>
   <div>
     <transition name="fade">
-      <div v-show="value.price && !errors" :ref="reference"></div>
+      <div v-show="value.price && !errors" :ref="reference" />
     </transition>
   </div>
 </template>
