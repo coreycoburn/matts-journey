@@ -1,5 +1,5 @@
 <template>
-  <header class="container mx-auto mt-8 mb-16">
+  <header class="container mx-auto mb-6 md:mb-16 md:mt-8">
     <MattNav />
   </header>
 </template>

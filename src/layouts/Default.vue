@@ -29,11 +29,8 @@ export default {
 </script>
 
 <style>
-  h1 {
-    @apply text-4xl;
-  }
   h2 {
-    @apply text-2xl;
+    @apply text-3xl;
   }
   a {
     @apply text-blue-500;

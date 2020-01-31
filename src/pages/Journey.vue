@@ -1,6 +1,6 @@
 <template>
-  <div class="container mx-auto max-w-2xl">
-    <h1>Matt's Journey</h1>
+  <div class="container mx-auto max-w-2xl px-6 md:px-0">
+    <h1 class="text-3xl md:text-4xl">Matt's Journey</h1>
     <p class="font-bold">
       Matt was diagnosed with terminal brain cancer on October 3, 2018 and he was given 12-18 months to enjoy his time here on earth.
     </p>

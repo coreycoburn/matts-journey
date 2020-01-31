@@ -1,6 +1,6 @@
 <template>
-  <div class="container mx-auto max-w-2xl">
-    <h1>Contact Event Coordinators</h1>
+  <div class="container mx-auto max-w-2xl px-6 md:px-0">
+    <h1 class="text-3xl md:text-4xl">Contact Event Coordinators</h1>
     <p>
       If you have questions or for more information you may fill out the following form, send an email or call one of the event coordinators for the {{ $static.metadata.eventName }} event.
     </p>
