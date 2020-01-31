@@ -13,25 +13,34 @@
         <li><strong>Ruth Appleby:</strong> 707-227-6123</li>
       </ul>
     </div>
-    <form class="mb-8">
+    <form @submit.prevent="submit" method="post" name="contact" action="/thanks" class="mb-8" netlify data-netlify-honeypot="bot-field">
+      <input type="hidden" name="form-name" value="contact" />
       <div>
         <label for="name" class="text-base">Name:</label>
-        <input type="text" id="name" name="name" placeholder="Full Name" class="w-full px-4 py-2 text-base appearance-none border-2 border-gray-400 bg-gray-200 rounded-lg" aria-required="true">
+        <input v-model="form.name" type="text" id="name" name="name" placeholder="Full Name" class="w-full px-4 py-2 text-base appearance-none border-2 border-gray-400 bg-gray-200 rounded-lg" aria-required="true">
       </div>
       <div>
         <label for="phone" class="text-base">Phone:</label>
-        <input type="text" id="phone" name="phone" placeholder="Phone" class="w-full px-4 py-2 text-base appearance-none border-2 border-gray-400 bg-gray-200 rounded-lg" aria-required="true">
+        <input v-model="form.phone" v-mask="'(###) ###-####'" type="text" id="phone" name="phone" placeholder="Phone" class="w-full px-4 py-2 text-base appearance-none border-2 border-gray-400 bg-gray-200 rounded-lg" aria-required="true">
       </div>
       <div>
-        <label for="email" class="text-base">Email:</label>
-        <input type="text" id="email" name="email" placeholder="Email" class="w-full px-4 py-2 text-base appearance-none border-2 border-gray-400 bg-gray-200 rounded-lg" aria-required="true">
+        <label for="email" class="text-base">
+          Email:
+          <span class="text-xs text-red-700" v-if="!$v.form.email.required">required</span>
+          <span class="text-xs text-red-700" v-if="!$v.form.email.email">must be an email</span>
+        </label>
+        <input v-model="form.email" type="text" id="email" name="email" placeholder="Email" class="w-full px-4 py-2 text-base appearance-none border-2 border-gray-400 bg-gray-200 rounded-lg" aria-required="true">
       </div>
       <div>
-        <label for="message" class="text-base">Message:</label>
-        <textarea id="message" name="message" class="w-full px-4 py-2 text-base appearance-none border-2 border-gray-400 bg-gray-200 rounded-lg" />
+        <label for="message" class="text-base">
+          Message:
+          <span class="text-xs text-red-700" v-if="!$v.form.message.required">required</span>
+          <span class="text-xs text-red-700" v-if="!$v.form.message.minLength">please enter longer message</span>
+        </label>
+        <textarea v-model="form.message" id="message" name="message" placeholder="Please let us know any questions you have" class="w-full px-4 py-2 text-base appearance-none border-2 border-gray-400 bg-gray-200 rounded-lg" />
       </div>
       <div class="flex justify-center">
-        <button class="button">Submit</button>
+        <button class="button" :disabled="$v.$invalid" :class="{ 'cursor-not-allowed': $v.$invalid }">Submit</button>
       </div>
     </form>
   </div>
@@ -47,9 +56,38 @@ query {
 </static-query>
 
 <script>
+  import {required, email, minLength} from 'vuelidate/lib/validators'
+
 export default {
   metaInfo: {
     title: 'Contact',
-  }
+  },
+  data() {
+    return {
+      form: {
+        name: '',
+        phone: '',
+        email: '',
+        message: '',
+      },
+    }
+  },
+  validations: {
+    form: {
+      email: {
+        required,
+        email,
+      },
+      message: {
+        required,
+        minLength: minLength(20),
+      },
+    },
+  },
+  methods: {
+    submit() {
+      console.log('submitting')
+    },
+  },
 }
 </script>
