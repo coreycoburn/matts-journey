@@ -9,7 +9,7 @@
               <button @click="donationToggle" aria-label="close">&times;</button>
             </div>
           </div>
-          <p>
+          <p class="text-xs">
             All required form fields must be filled out to make a donation.
           </p>
           <div class="leading-tight">
@@ -139,7 +139,6 @@ export default {
   },
   computed: {
     ...mapState({
-      processing: state => state.processing,
       donationDialogShow: state => state.donationDialogShow,
     }),
     footerPrice() {
@@ -173,3 +172,27 @@ export default {
   },
 }
 </script>
+
+<style>
+  .fade-enter-active,
+  .fade-leave-active {
+    transition: opacity 0.5s;
+  }
+
+  .fade-enter,
+  .fade-leave-to {
+    opacity: 0;
+  }
+
+  .slide-up-enter-active,
+  .slide-up-leave-active {
+    transform: translateY(0);
+    transition: opacity 0.5s, transform 0.5s;
+  }
+
+  .slide-up-enter,
+  .slide-up-leave-to {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+</style>

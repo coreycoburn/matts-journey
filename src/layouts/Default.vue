@@ -5,7 +5,7 @@
       <slot/>
     </div>
     <MattFooter />
-    <div :class="{ processing: processing }" class="flex justify-center items-center">Processing...</div>
+    <div :class="{ processing: processing }" class="flex justify-center items-center hidden">Processing...</div>
   </div>
 </template>
 
@@ -52,7 +52,7 @@ export default {
     @apply bg-blue-300;
   }
   .processing {
-    @apply fixed top-0 left-0 w-full h-full text-white text-3xl cursor-wait;
+    @apply fixed flex top-0 left-0 w-full h-full text-white text-3xl cursor-wait;
     z-index: 120;
     transform: translate3d(0, 0, 0);
     background-color: black;
