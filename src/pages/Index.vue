@@ -82,10 +82,8 @@
         </div>
       </div>
       <div class="italic bg-gray-200 text-center rounded mb-8">* For Logo & name placement, your commitment must be received no later than Tuesday, February 4th</div>
-      <div class="text-center">
-        <button class="button">
-          Sponsor Event
-        </button>
+      <div class="flex justify-center">
+        <Sponsor reference="sponsor" />
       </div>
     </div>
     <div class="bg-gray-200 py-16">
@@ -138,6 +136,7 @@
 </template>
 
 <script>
+import Sponsor from '~/components/Sponsor'
 import Donation from '~/components/Donation'
 import Auction from '~/components/Auction'
 import { VDialog } from 'vuetensils'
@@ -148,6 +147,7 @@ export default {
     title: 'Hello, world!'
   },
   components: {
+    Sponsor,
     Donation,
     Auction,
     VDialog,

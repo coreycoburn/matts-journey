@@ -18,6 +18,7 @@ export default function (Vue, { appOptions }) {
         status: null,
         message: '',
       },
+      sponsorDialogShow: true,
       donationDialogShow: false,
       auctionDialogShow: false,
     },
@@ -42,6 +43,9 @@ export default function (Vue, { appOptions }) {
           status: null,
           message: '',
         }
+      },
+      sponsorToggle(state) {
+        state.sponsorDialogShow = !state.sponsorDialogShow
       },
       donationToggle(state) {
         state.donationDialogShow = !state.donationDialogShow
