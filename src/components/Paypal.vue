@@ -6,8 +6,16 @@
   </div>
 </template>
 
+<static-query>
+query {
+  metadata {
+    email,
+  }
+}
+</static-query>
+
 <script>
-import { mapMutations } from "vuex";
+import { mapState, mapMutations } from "vuex";
 
 const contentful = require('contentful-management')
 
@@ -30,6 +38,11 @@ export default {
       default: false,
     },
   },
+  computed: {
+    ...mapState({
+      'processing': state => state.processing,
+    }),
+  },
   mounted() {
     this.$loadScript(`https://www.paypal.com/sdk/js?client-id=${process.env.GRIDSOME_PAYPAL_CLIENT}&currency=USD&intent=capture&disable-funding=credit`)
       .then(() => {
@@ -45,7 +58,7 @@ export default {
                 email_address: this.value.email,
                 phone: {
                   phone_number: {
-                    national_number: this.value.phone
+                    national_number: this.value.phone,
                   }
                 }
               },
@@ -59,10 +72,9 @@ export default {
             })
           },
           onApprove: (data, actions) => {
-            this.toggle()
+            this.processingToggle()
 
             return actions.order.capture().then(response => {
-              console.log(response)
               client.getSpace(process.env.GRIDSOME_CTF_SPACE_ID)
                 .then((space) => space.getEnvironment(process.env.GRIDSOME_ENVIRONMENT))
                 .then((environment) => environment.createEntry(this.reference, {
@@ -95,31 +107,59 @@ export default {
                       'en-US': '',
                     },
                     specialMessage: {
-                      'en-US': '',
+                      'en-US': this.value.message,
                     },
                     amount: {
                       'en-US': parseFloat(response.purchase_units[0].amount.value),
                     },
-                    createdTime: response.created_time,
+                    createdTime: {
+                      'en-US': new Date(response.create_time),
+                    },
                     payerId: {
                       'en-US': response.payer.payer_id,
                     },
                     paymentId: {
-                      'en-US': response.id
+                      'en-US': response.id,
                     },
                   }
                 }))
                 .then((entry) => entry.publish())
-                .catch(console.error)
+                .then(() => {
+                  this.$emit('clear')
+                  this.processingToggle()
+                  this.toggle()
+                  this.messageToggle({
+                    status: 200,
+                    message: 'Thank you for your donation. Your generosity will help Matt continue his treatments and ease the burden caused by the expenses.',
+                  })
+                })
+                .catch(() => {
+                  this.processingToggle()
+                  this.toggle()
+                  this.messageToggle({
+                    status: 400,
+                    message: `Your payment was successful but your details were not logged to our database. Please email <a href="mailto:${this.$static.metadata.email}">${this.$static.metadata.email}</a>`,
+                  })
+                })
             })
           },
           onError: function (err) {
-            // Show an error page here, when an error occurs
+            this.processingToggle()
+            this.toggle()
+            this.messageToggle({
+              status: 400,
+              message: `Hmm... something went wrong with PayPal. Please email at <a href="mailto:${this.$static.metadata.email}">${this.$static.metadata.email}</a> Please reference error: ${error}`,
+            })
           },
         }).render(this.$refs[this.reference])
       })
       .catch(() => {
-        console.log('failed to load paypal')
+        this.processingToggle()
+        this.toggle()
+        this.messageToggle({
+          status: 400,
+          message: 'Failed to load Paypal. Please refresh the page',
+        })
       })
   },
   watch: {
@@ -132,7 +172,11 @@ export default {
       toggle(commit) {
         commit(`${this.reference}Toggle`)
       },
+      processingToggle: 'processingToggle',
     }),
+    messageToggle(payload) {
+      this.$store.commit('messageToggle', payload)
+    },
   }
 }
 </script>

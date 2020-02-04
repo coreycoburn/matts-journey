@@ -1,7 +1,7 @@
 <template>
   <div>
     <ClientOnly>
-      <VDialog :showing="cashDonationDialog" @change="donationToggle" transition="slide-up" bg-transition="fade" noScroll :classes="{ content: 'w-full md:w-1/3 rounded-lg' }">
+      <VDialog :showing="donationDialogShow" @change="donationToggle" transition="slide-up" bg-transition="fade" noScroll :classes="{ content: 'w-full md:w-1/3 rounded-lg' }">
         <div class="p-6">
           <div class="flex">
             <h2 class="flex-1">Donate to Matt</h2>
@@ -9,6 +9,9 @@
               <button @click="donationToggle" aria-label="close">&times;</button>
             </div>
           </div>
+          <p>
+            All required form fields must be filled out to make a donation.
+          </p>
           <div class="leading-tight">
             <div class="mb-2">
               <label for="company" class="text-sm">Company:</label>
@@ -32,7 +35,7 @@
                   <span class="text-xs text-red-700" v-if="!$v.form.phone.required">required</span>
                   <span class="text-xs text-red-700" v-if="!$v.form.phone.minLength">must be valid, 10 digit phone</span>
                 </label>
-                <input v-model="form.phone" v-mask="'##########'" placeholder="707123456" type="text" id="phone" name="phone" class="w-full px-2 text-sm leading-loose appearance-none border-2 border-gray-400 bg-gray-200 rounded-lg" aria-required="true">
+                <input v-model="form.phone" v-mask="'##########'" placeholder="7071234567" type="text" id="phone" name="phone" class="w-full px-2 text-sm leading-loose appearance-none border-2 border-gray-400 bg-gray-200 rounded-lg" aria-required="true">
               </div>
               <div class="w-full md:w-1/2">
                 <label for="email" class="text-sm">
@@ -42,6 +45,10 @@
                 </label>
                 <input v-model="form.email" type="text" id="email" name="email" class="w-full px-2 text-sm leading-loose appearance-none border-2 border-gray-400 bg-gray-200 rounded-lg" aria-required="true">
               </div>
+            </div>
+            <div class="w-full">
+              <label for="message" class="text-sm">Message for Matt:</label>
+              <textarea v-model="form.message" placeholder="Feel free to write a message to Matt here..." id="message" name="message"  class="w-full px-2 text-sm leading-loose appearance-none border-2 border-gray-400 bg-gray-200 rounded-lg" />
             </div>
           </div>
           <p>How much would you like to donate?</p>
@@ -69,7 +76,7 @@
               />
             </div>
           </div>
-          <Paypal v-model="form" reference="donation" :errors="$v.$invalid" />
+          <Paypal @clear="clear" v-model="form" reference="donation" :errors="$v.$invalid" />
         </div>
         <div class="flex bg-blue-500 text-gray-100 text-sm px-6 py-3">
           <div class="flex-1">Donate</div>
@@ -107,6 +114,7 @@ export default {
         lastName: '',
         phone: '',
         email: '',
+        message: '',
       },
       otherAmountShow: false,
     }
@@ -131,7 +139,8 @@ export default {
   },
   computed: {
     ...mapState({
-      cashDonationDialog: state => state.donationDialogShow
+      processing: state => state.processing,
+      donationDialogShow: state => state.donationDialogShow,
     }),
     footerPrice() {
       return this.form.price ? `$${this.form.price.toFixed(2)}` : '$0.00'
@@ -151,6 +160,15 @@ export default {
     },
     priceActive(amount) {
       return (amount === this.form.price || (this.otherAmountShow && amount === 'other')) ? 'bg-blue-500 hover:bg-blue-500' : ''
+    },
+    clear() {
+      this.form.price = 0
+      this.form.company = ''
+      this.form.firstName = ''
+      this.form.lastName = ''
+      this.form.phone = ''
+      this.form.email = ''
+      this.form.message = ''
     },
   },
 }

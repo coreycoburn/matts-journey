@@ -114,11 +114,35 @@
         </div>
       </div>
     </div>
+    <VDialog :showing="messageDialogShow" @change="messageToggle" transition="slide-up" bg-transition="fade" noScroll :classes="{ content: 'w-full md:w-1/3 rounded-lg' }">
+      <div class="p-6">
+        <div v-if="messageText.status === 200">
+          <div class="flex">
+            <h2 class="flex-1 text-green-500">Thank You!</h2>
+            <div class="flex-end">
+              <button @click="messageToggle" aria-label="close">&times;</button>
+            </div>
+          </div>
+          <div v-html="messageText.message" />
+        </div>
+        <div v-else>
+          <div class="flex">
+            <h2 class="flex-1 text-red-500">Something went wrong...</h2>
+            <div class="flex-end">
+              <button @click="messageToggle" aria-label="close">&times;</button>
+            </div>
+          </div>
+          <div v-html="messageText.message" />
+        </div>
+      </div>
+    </VDialog>
   </div>
 </template>
 
 <script>
 import CashDonation from '~/components/CashDonation'
+import { VDialog } from 'vuetensils'
+import {mapMutations, mapState} from "vuex";
 
 export default {
   metaInfo: {
@@ -126,6 +150,18 @@ export default {
   },
   components: {
     CashDonation,
+    VDialog,
+  },
+  computed: {
+    ...mapState({
+      messageDialogShow: state => state.messageDialogShow,
+      messageText: state => state.messageText,
+    }),
+  },
+  methods: {
+    ...mapMutations({
+      messageToggle: 'messageToggle',
+    }),
   },
 }
 </script>

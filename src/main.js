@@ -11,12 +11,33 @@ export default function (Vue, { appOptions }) {
 
   appOptions.store = new Vuex.Store({
     state: {
+      processing: false,
+      messageDialogShow: false,
+      messageText: {
+        status: null,
+        message: '',
+      },
       donationDialogShow: false,
     },
     mutations: {
+      processingToggle(state) {
+        state.processing = !state.processing
+      },
+      messageToggle(state, payload) {
+        state.messageDialogShow = !state.messageDialogShow
+
+        if (state.messageDialogShow) {
+           return state.messageText = payload
+        }
+
+        state.messageText = {
+          status: null,
+          message: '',
+        }
+      },
       donationToggle(state) {
         state.donationDialogShow = !state.donationDialogShow
-      }
+      },
     }
   })
 }

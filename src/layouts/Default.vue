@@ -5,6 +5,7 @@
       <slot/>
     </div>
     <MattFooter />
+    <div :class="{ processing: processing }" class="flex justify-center items-center">Processing...</div>
   </div>
 </template>
 
@@ -19,11 +20,17 @@ query {
 <script>
 import MattHeader from './partials/Header'
 import MattFooter from './partials/Footer'
+import { mapState } from 'vuex'
 
 export default {
   components: {
     MattHeader,
     MattFooter,
+  },
+  computed: {
+    ...mapState({
+      processing: state => state.processing,
+    }),
   },
 }
 </script>
@@ -43,5 +50,12 @@ export default {
   }
   .button:hover {
     @apply bg-blue-300;
+  }
+  .processing {
+    @apply fixed top-0 left-0 w-full h-full text-white text-3xl cursor-wait;
+    z-index: 120;
+    transform: translate3d(0, 0, 0);
+    background-color: black;
+    background-color: rgba(0, 0, 0, 0.8);
   }
 </style>
