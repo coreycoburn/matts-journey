@@ -17,7 +17,7 @@ export default function (Vue, { appOptions }) {
         status: null,
         message: '',
       },
-      donationDialogShow: false,
+      cashDonationDialogShow: false,
     },
     mutations: {
       processingToggle(state) {
@@ -35,8 +35,8 @@ export default function (Vue, { appOptions }) {
           message: '',
         }
       },
-      donationToggle(state) {
-        state.donationDialogShow = !state.donationDialogShow
+      cashDonationToggle(state) {
+        state.cashDonationDialogShow = !state.cashDonationDialogShow
       },
     }
   })

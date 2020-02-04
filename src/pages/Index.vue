@@ -94,7 +94,7 @@
         <p class="mb-8">You can also assist Matt by making a Cash Donation or provide an item for the Silent Auction.</p>
         <div class="flex flex-col md:flex-row">
           <div class="flex w-full justify-center mb-6 md:w-1/2 md:mb-0">
-            <CashDonation />
+            <CashDonation reference="cashDonation" />
           </div>
           <div class="flex w-full justify-center md:w-1/2">
             <button class="button">

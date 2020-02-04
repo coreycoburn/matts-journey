@@ -1,6 +1,6 @@
 <template>
   <div>
-    <Dialog reference="donation" title="Donate to Matt">
+    <Dialog :reference="reference" title="Donate to Matt">
       <p class="text-xs">
         All required form fields must be filled out to make a donation.
       </p>
@@ -68,7 +68,7 @@
           />
         </div>
       </div>
-      <Paypal @clear="clear" v-model="form" reference="donation" :errors="$v.$invalid" />
+      <Paypal @clear="clear" v-model="form" :reference="reference" :errors="$v.$invalid" />
       <template #footer>
         <div class="flex bg-blue-500 text-gray-100 text-sm px-6 py-3">
           <div class="flex-1">Donate</div>
@@ -76,7 +76,7 @@
         </div>
       </template>
     </Dialog>
-    <DialogButton reference="donation">
+    <DialogButton :reference="reference">
       Make Cash Donation
     </DialogButton>
   </div>
@@ -89,6 +89,12 @@ import DialogButton from './DialogButton'
 import Paypal from './Paypal'
 
 export default {
+  props: {
+    reference: {
+      type: String,
+      required: true,
+    },
+  },
   components: {
     Dialog,
     DialogButton,

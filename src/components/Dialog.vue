@@ -3,7 +3,7 @@
     <ClientOnly>
       <VDialog :showing="dialogShow" @change="toggle" transition="slide-up" bg-transition="fade" noScroll :classes="{ content: 'w-full md:w-1/3 rounded-lg' }">
         <div class="p-6">
-          <div class="flex">
+          <div class="flex border-b-2 mb-2">
             <h2 class="flex-1" v-text="title" />
             <div class="flex-end">
               <button @click="toggle" aria-label="close">&times;</button>
