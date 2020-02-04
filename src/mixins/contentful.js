@@ -9,73 +9,34 @@ const client = contentful.createClient({
 export default {
   methods: {
     ...mapMutations({
-      processingToggle: 'processingToggle',
+      toggle(commit) {
+        commit(`${this.reference}Toggle`)
+      },
+      formShow: 'formShow',
+      messageToggle: 'messageToggle',
     }),
-    submitToContentful(response) {
+    submitToContentful(fields, message) {
       client.getSpace(process.env.GRIDSOME_CTF_SPACE_ID)
         .then((space) => space.getEnvironment(process.env.GRIDSOME_ENVIRONMENT))
-        .then((environment) => environment.createEntry(this.reference, {
-          fields: {
-            company: {
-              'en-US': this.value.company,
-            },
-            firstName: {
-              'en-US': this.value.firstName,
-            },
-            lastName: {
-              'en-US': this.value.lastName,
-            },
-            phone: {
-              'en-US': this.value.phone,
-            },
-            email: {
-              'en-US': this.value.email,
-            },
-            address: {
-              'en-US': '',
-            },
-            city: {
-              'en-US': '',
-            },
-            state: {
-              'en-US': '',
-            },
-            zip: {
-              'en-US': '',
-            },
-            specialMessage: {
-              'en-US': this.value.message,
-            },
-            amount: {
-              'en-US': parseFloat(response.purchase_units[0].amount.value),
-            },
-            createdTime: {
-              'en-US': new Date(response.create_time),
-            },
-            payerId: {
-              'en-US': response.payer.payer_id,
-            },
-            paymentId: {
-              'en-US': response.id,
-            },
-          }
-        }))
+        .then((environment) => environment.createEntry(this.reference, { fields: fields }))
         .then((entry) => entry.publish())
         .then(() => {
           this.processingToggle()
-          this.$emit('clear')
+          this.formShow()
+          this.clear()
           this.toggle()
           this.messageToggle({
             status: 200,
-            message: 'Thank you for your donation. Your generosity will help Matt continue his treatments and ease the burden caused by the expenses.',
+            message: message.success,
           })
         })
         .catch(() => {
           this.processingToggle()
+          this.formShow()
           this.toggle()
           this.messageToggle({
             status: 400,
-            message: `Your payment was successful but your details were not logged to our database. Please email <a href="mailto:${this.$static.metadata.email}">${this.$static.metadata.email}</a>`,
+            message: message.error,
           })
         })
     },

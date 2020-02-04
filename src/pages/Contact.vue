@@ -40,7 +40,7 @@
         <textarea v-model="form.message" id="message" name="message" placeholder="Please let us know any questions you have" class="w-full px-4 py-2 text-base appearance-none border-2 border-gray-400 bg-gray-200 rounded-lg" />
       </div>
       <div class="flex justify-center">
-        <button class="button" :disabled="$v.$invalid" :class="{ 'cursor-not-allowed': $v.$invalid }">Submit</button>
+        <SubmitButton :invalid="$v.$invalid" />
       </div>
     </form>
   </div>
@@ -56,11 +56,15 @@ query {
 </static-query>
 
 <script>
-  import {required, email, minLength} from 'vuelidate/lib/validators'
+import { required, email, minLength } from 'vuelidate/lib/validators'
+import SubmitButton from '~/components/SubmitButton'
 
 export default {
   metaInfo: {
     title: 'Contact',
+  },
+  components: {
+    SubmitButton,
   },
   data() {
     return {

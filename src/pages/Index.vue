@@ -94,12 +94,10 @@
         <p class="mb-8">You can also assist Matt by making a Cash Donation or provide an item for the Silent Auction.</p>
         <div class="flex flex-col md:flex-row">
           <div class="flex w-full justify-center mb-6 md:w-1/2 md:mb-0">
-            <CashDonation reference="cashDonation" />
+            <Donation reference="donation" />
           </div>
           <div class="flex w-full justify-center md:w-1/2">
-            <button class="button">
-              Donate Auction Item
-            </button>
+            <Auction reference="auction" />
           </div>
         </div>
       </div>
@@ -140,7 +138,8 @@
 </template>
 
 <script>
-import CashDonation from '~/components/CashDonation'
+import Donation from '~/components/Donation'
+import Auction from '~/components/Auction'
 import { VDialog } from 'vuetensils'
 import {mapMutations, mapState} from "vuex";
 
@@ -149,7 +148,8 @@ export default {
     title: 'Hello, world!'
   },
   components: {
-    CashDonation,
+    Donation,
+    Auction,
     VDialog,
   },
   computed: {
