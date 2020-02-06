@@ -148,7 +148,7 @@ import {mapMutations, mapState} from "vuex";
 
 export default {
   metaInfo: {
-    title: 'Hello, world!'
+    title: 'Field of Hope'
   },
   components: {
     Sponsor,
