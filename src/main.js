@@ -18,7 +18,7 @@ export default function (Vue, { appOptions }) {
         status: null,
         message: '',
       },
-      sponsorDialogShow: true,
+      sponsorDialogShow: false,
       donationDialogShow: false,
       auctionDialogShow: false,
     },

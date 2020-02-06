@@ -46,11 +46,11 @@
           </div>
           <p>How much would you like to donate?</p>
           <div class="flex flex-wrap justify-around mb-6">
-            <button @click="updatePrice(20)" :class="priceActive(20)" class="bg-blue-200 shadow text-gray-100 uppercase text-sm font-bold rounded-lg px-4 py-1 mb-6 hover:bg-blue-300 md:mb-0">$20</button>
-            <button @click="updatePrice(50)" :class="priceActive(50)" class="bg-blue-200 shadow text-gray-100 uppercase text-sm font-bold rounded-lg px-4 py-1 mb-6 hover:bg-blue-300 md:mb-0">$50</button>
-            <button @click="updatePrice(100)" :class="priceActive(100)" class="bg-blue-200 shadow text-gray-100 uppercase text-sm font-bold rounded-lg px-4 py-1 mb-6 hover:bg-blue-300 md:mb-0">$100</button>
-            <button @click="updatePrice(250)" :class="priceActive(250)" class="bg-blue-200 shadow text-gray-100 uppercase text-sm font-bold rounded-lg px-4 py-1 mb-6 hover:bg-blue-300 md:mb-0">$250</button>
-            <button @click="otherAmount()" :class="priceActive('other')" class="bg-blue-200 shadow text-gray-100 uppercase text-sm font-bold rounded-lg px-4 py-1 mb-6 hover:bg-blue-300 md:mb-0">Other</button>
+            <button @click="updateAmount(20)" :class="amountActive(20)" class="bg-blue-200 shadow text-gray-100 uppercase text-sm font-bold rounded-lg px-4 py-1 mb-6 hover:bg-blue-300 md:mb-0">$20</button>
+            <button @click="updateAmount(50)" :class="amountActive(50)" class="bg-blue-200 shadow text-gray-100 uppercase text-sm font-bold rounded-lg px-4 py-1 mb-6 hover:bg-blue-300 md:mb-0">$50</button>
+            <button @click="updateAmount(100)" :class="amountActive(100)" class="bg-blue-200 shadow text-gray-100 uppercase text-sm font-bold rounded-lg px-4 py-1 mb-6 hover:bg-blue-300 md:mb-0">$100</button>
+            <button @click="updateAmount(250)" :class="amountActive(250)" class="bg-blue-200 shadow text-gray-100 uppercase text-sm font-bold rounded-lg px-4 py-1 mb-6 hover:bg-blue-300 md:mb-0">$250</button>
+            <button @click="otherAmount()" :class="amountActive('other')" class="bg-blue-200 shadow text-gray-100 uppercase text-sm font-bold rounded-lg px-4 py-1 mb-6 hover:bg-blue-300 md:mb-0">Other</button>
           </div>
           <div v-show="otherAmountShow" class="flex items-end mb-12">
             <div class="mr-3">
@@ -58,7 +58,7 @@
             </div>
             <div>
               <CurrencyInput
-                v-model="form.price"
+                v-model="form.amount"
                 :currency="null"
                 locale="en"
                 :allow-negative="false"
@@ -76,11 +76,11 @@
           </p>
         </div>
       </transition>
-      <Paypal @clear="clear" v-model="form" :reference="reference" :errors="$v.$invalid" />
+      <Paypal @clear="clear" @contentful-entry="contentfulEntry" v-model="form" :reference="reference" :contentful-fields="contentfulFields" :message="message" :errors="$v.$invalid" />
       <template #footer>
         <div class="flex bg-blue-500 text-gray-100 text-sm px-6 py-3">
           <div class="flex-1">Donate</div>
-          <div class="flex-end" v-text="footerPrice" />
+          <div class="flex-end" v-text="footerAmount" />
         </div>
       </template>
     </Dialog>
@@ -89,6 +89,14 @@
     </DialogButton>
   </div>
 </template>
+
+<static-query>
+query {
+  metadata {
+    email,
+  }
+}
+</static-query>
 
 <script>
 import { mapState } from 'vuex'
@@ -116,15 +124,16 @@ export default {
   data() {
     return {
       form: {
-        price: 0,
         company: '',
         firstName: '',
         lastName: '',
         phone: '',
         email: '',
         message: '',
+        amount: 0,
       },
       otherAmountShow: false,
+      contentfulFields: {},
     }
   },
   validations: {
@@ -149,31 +158,84 @@ export default {
     ...mapState({
       formShow: state => state.formShow,
     }),
-    footerPrice() {
-      return this.form.price ? `$${this.form.price.toFixed(2)}` : '$0.00'
+    footerAmount() {
+      return this.form.amount ? `$${this.form.amount.toFixed(2)}` : '$0.00'
+    },
+    message() {
+      return {
+        success: 'Thank you for your donation. Your generosity will help Matt continue his treatments and ease the burden caused by the expenses.',
+        error: `Your donation payment was successful but your details were not logged to our database. Please email <a href="mailto:${this.$static.metadata.email}">${this.$static.metadata.email}</a>`,
+      }
     },
   },
   methods: {
-    updatePrice(price) {
-      this.form.price = price
+    updateAmount(amount) {
+      this.form.amount = amount
       this.otherAmountShow = false
     },
     otherAmount() {
       this.otherAmountShow = true
-      this.form.price = 0
+      this.form.amount = 0
     },
-    priceActive(amount) {
-      return (amount === this.form.price || (this.otherAmountShow && amount === 'other')) ? 'bg-blue-500 hover:bg-blue-500' : ''
+    amountActive(amount) {
+      return (amount === this.form.amount || (this.otherAmountShow && amount === 'other')) ? 'bg-blue-500 hover:bg-blue-500' : ''
     },
     clear() {
-      this.form.price = 0
       this.form.company = ''
       this.form.firstName = ''
       this.form.lastName = ''
       this.form.phone = ''
       this.form.email = ''
       this.form.message = ''
+      this.form.amount = 0
     },
+    contentfulEntry(response) {
+      this.contentfulFields = {
+        company: {
+          'en-US': this.form.company,
+        },
+        name: {
+          'en-US': `${this.form.firstName} ${this.form.lastName}`,
+        },
+        phone: {
+          'en-US': this.form.phone,
+        },
+        email: {
+          'en-US': this.form.email,
+        },
+        address: {
+          'en-US': response.purchase_units[0].shipping.address.address_line_1,
+        },
+        address2: {
+          'en-US': response.purchase_units[0].shipping.address.hasOwnProperty('address_line_2')
+            ? response.purchase_units[0].shipping.address.address_line_2 : '',
+        },
+        city: {
+          'en-US': response.purchase_units[0].shipping.address.admin_area_2,
+        },
+        state: {
+          'en-US': response.purchase_units[0].shipping.address.admin_area_1,
+        },
+        zip: {
+          'en-US': response.purchase_units[0].shipping.address.postal_code,
+        },
+        specialMessage: {
+          'en-US': this.form.message,
+        },
+        amount: {
+          'en-US': parseFloat(response.purchase_units[0].amount.value),
+        },
+        payerId: {
+          'en-US': response.payer.payer_id,
+        },
+        paymentId: {
+          'en-US': response.id
+        },
+        createdTime: {
+          'en-US': new Date(response.create_time),
+        },
+      }
+    }
   },
 }
 </script>

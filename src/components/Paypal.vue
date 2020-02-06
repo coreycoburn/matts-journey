@@ -1,7 +1,7 @@
 <template>
   <div>
     <transition name="fade">
-      <div v-show="value.price && !errors" :ref="reference" />
+      <div v-show="value.amount && !errors" :ref="reference" />
     </transition>
   </div>
 </template>
@@ -26,6 +26,14 @@ export default {
     },
     reference: {
       type: String,
+      required: true,
+    },
+    contentfulFields: {
+      type: Object,
+      required: true,
+    },
+    message: {
+      type: Object,
       required: true,
     },
     errors: {
@@ -56,7 +64,7 @@ export default {
               purchase_units: [
                 {
                   amount: {
-                    value: this.value.price,
+                    value: this.value.amount,
                   },
                 }
               ]
@@ -69,57 +77,16 @@ export default {
             this.processingToggle()
 
             return actions.order.capture().then(response => {
-              this.submitToContentful({
-                company: {
-                  'en-US': this.value.company,
-                },
-                name: {
-                  'en-US': `${this.value.firstName} ${this.value.lastName}`,
-                },
-                phone: {
-                  'en-US': this.value.phone,
-                },
-                email: {
-                  'en-US': this.value.email,
-                },
-                address: {
-                  'en-US': response.purchase_units[0].shipping.address.address_line_1,
-                },
-                address2: {
-                  'en-US': response.purchase_units[0].shipping.address.hasOwnProperty('address_line_2')
-                    ? response.purchase_units[0].shipping.address.address_line_2 : '',
-                },
-                city: {
-                  'en-US': response.purchase_units[0].shipping.address.admin_area_2,
-                },
-                state: {
-                  'en-US': response.purchase_units[0].shipping.address.admin_area_1,
-                },
-                zip: {
-                  'en-US': response.purchase_units[0].shipping.address.postal_code,
-                },
-                specialMessage: {
-                  'en-US': this.value.message,
-                },
-                amount: {
-                  'en-US': parseFloat(response.purchase_units[0].amount.value),
-                },
-                createdTime: {
-                  'en-US': new Date(response.create_time),
-                },
-                payerId: {
-                  'en-US': response.payer.payer_id,
-                },
-                paymentId: {
-                  'en-US': response.id
-                },
-              }, {
-                success: 'Thank you for your donation. Your generosity will help Matt continue his treatments and ease the burden caused by the expenses.',
-                error: `Your payment was successful but your details were not logged to our database. Please email <a href="mailto:${this.$static.metadata.email}">${this.$static.metadata.email}</a>`,
+              new Promise((resolve, reject) => {
+                this.$emit('contentful-entry', response)
+                resolve('done')
+                reject('error')
+              }).then(() => {
+                this.submitToContentful(this.contentfulFields, this.message)
               })
             })
           },
-          onError: function (err) {
+          onError: (err) => {
             this.toggle()
             this.messageToggle({
               status: 400,
@@ -132,7 +99,7 @@ export default {
         this.toggle()
         this.messageToggle({
           status: 400,
-          message: 'Failed to load Paypal. Please refresh the page',
+          message: 'Failed to load PayPal. Please refresh the page',
         })
       })
   },
