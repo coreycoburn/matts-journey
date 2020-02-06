@@ -4,7 +4,6 @@
     <g-link to="/journey" class="md:pb-3 md:mr-12">Matt's Journey</g-link>
     <g-link to="/brain-cancer-awareness" class="md:pb-3 md:mr-12">Brain Cancer Awareness</g-link>
     <g-link to="/contact" class="md:pb-3 md:mr-12">Contact</g-link>
-    <g-link to="/sponsors">Sponsors</g-link>
   </nav>
 </template>
 
