@@ -135,7 +135,7 @@
           </div>
         </div>
       </VDialog>
-    <ClientOnly>
+    </ClientOnly>
   </div>
 </template>
 
