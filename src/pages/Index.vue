@@ -112,28 +112,30 @@
         </div>
       </div>
     </div>
-    <VDialog :showing="messageDialogShow" @change="messageToggle" transition="slide-up" bg-transition="fade" noScroll :classes="{ content: 'w-full lg:w-1/3 rounded-lg' }">
-      <div class="p-6">
-        <div v-if="messageText.status === 200">
-          <div class="flex">
-            <h2 class="flex-1 text-green-500">Thank You!</h2>
-            <div class="flex-end">
-              <button @click="messageToggle" aria-label="close">&times;</button>
+    <ClientOnly>
+      <VDialog :showing="messageDialogShow" @change="messageToggle" transition="slide-up" bg-transition="fade" noScroll :classes="{ content: 'w-full lg:w-1/3 rounded-lg' }">
+        <div class="p-6">
+          <div v-if="messageText.status === 200">
+            <div class="flex">
+              <h2 class="flex-1 text-green-500">Thank You!</h2>
+              <div class="flex-end">
+                <button @click="messageToggle" aria-label="close">&times;</button>
+              </div>
             </div>
+            <div v-html="messageText.message" />
           </div>
-          <div v-html="messageText.message" />
-        </div>
-        <div v-else>
-          <div class="flex">
-            <h2 class="flex-1 text-red-500">Something went wrong...</h2>
-            <div class="flex-end">
-              <button @click="messageToggle" aria-label="close">&times;</button>
+          <div v-else>
+            <div class="flex">
+              <h2 class="flex-1 text-red-500">Something went wrong...</h2>
+              <div class="flex-end">
+                <button @click="messageToggle" aria-label="close">&times;</button>
+              </div>
             </div>
+            <div v-html="messageText.message" />
           </div>
-          <div v-html="messageText.message" />
         </div>
-      </div>
-    </VDialog>
+      </VDialog>
+    <ClientOnly>
   </div>
 </template>
 
