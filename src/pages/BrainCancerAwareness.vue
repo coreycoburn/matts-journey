@@ -20,7 +20,7 @@
         </div>
       </div>
       <div class="flex justify-center md:justify-end md:w-1/4">
-        <g-image src="~/images/brain_cancer_awareness_ribbon.jpg" />
+        <img src="/images/brain_cancer_awareness_ribbon.jpg" />
       </div>
     </div>
   </div>

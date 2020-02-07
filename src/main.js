@@ -43,7 +43,7 @@ export default function (Vue, { appOptions, head }) {
   })
   head.meta.push({
     property: 'og:image',
-    content: 'https://www.helpmattappleby.com/field_of_hope_logo.jpg',
+    content: 'https://www.helpmattappleby.com/images/field_of_hope_logo.jpg',
   })
   head.meta.push({
     name: 'twitter:card',
@@ -63,7 +63,7 @@ export default function (Vue, { appOptions, head }) {
   })
   head.meta.push({
     name: 'twitter:image',
-    content: 'https://www.helpmattappleby.com/field_of_hope_logo.jpg',
+    content: 'https://www.helpmattappleby.com/images/field_of_hope_logo.jpg',
   })
 
   appOptions.store = new Vuex.Store({

@@ -3,16 +3,16 @@
     <div class="container mx-auto flex flex-col-reverse px-6 lg:flex-row xl:px-0">
       <div class="w-full lg:w-1/2">
         <div>
-          <g-image src="~/images/matt_with_baseball.png" alt="Matt with a baseball at a game" />
+          <img src="/images/matt_with_baseball.png" alt="Matt with a baseball at a game">
         </div>
       </div>
       <div class="flex flex-col-reverse w-full items-center text-blue-500 lg:flex-col lg:w-1/2">
         <div class="flex flex-row mb-12 items-center">
           <div class="flex w-1/2 justify-start">
-            <g-image src="~/images/field_of_hope_logo.jpg" alt="Field of Hope logo" />
+            <img src="/images/field_of_hope_logo.jpg" alt="Field of Hope logo" />
           </div>
           <div class="flex w-1/2 justify-end">
-            <g-image src="~/images/brain_cancer_awareness_ribbon.jpg" alt="Brain Cancer Awareness ribbon" />
+            <img src="/images/brain_cancer_awareness_ribbon.jpg" alt="Brain Cancer Awareness ribbon" />
           </div>
         </div>
         <div class="flex flex-col items-center mb-6 lg:mb-0">
@@ -39,7 +39,7 @@
           </p>
         </div>
         <div class="flex w-full items-center justify-center lg:w-1/3">
-          <g-image src="~/images/field_of_hope_logo.jpg" class="mr-6 rounded-full border-8 border-gray-400 mb-6 lg:mb-0" />
+          <img src="/images/field_of_hope_logo.jpg" class="mr-6 rounded-full border-8 border-gray-400 mb-6 lg:mb-0" />
         </div>
       </div>
       <div class="text-center">
@@ -105,10 +105,10 @@
     <div class="container mx-auto lg:py-16">
       <div class="flex flex-col justify-center lg:flex-row">
         <div class="flex justify-center">
-          <g-image src="~/images/matt_is_dopey.jpg" height="800" class="xl:rounded-tl-lg xl:rounded-bl-lg" alt="Matt at the Disney Dopey Run with all of his medals" />
+          <img src="/images/matt_is_dopey.jpg" class="xl:rounded-tl-lg xl:rounded-bl-lg" alt="Matt at the Disney Dopey Run with all of his medals" />
         </div>
         <div>
-          <g-image src="~/images/matt_thumbs_up.jpg" height="800" class="xl:rounded-tr-lg xl:rounded-br-lg" alt="Matt giving thumbs up in hospital bed" />
+          <img src="/images/matt_thumbs_up.jpg" class="xl:rounded-tr-lg xl:rounded-br-lg" alt="Matt giving thumbs up in hospital bed" />
         </div>
       </div>
     </div>
