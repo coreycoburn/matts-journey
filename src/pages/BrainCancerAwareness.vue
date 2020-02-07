@@ -8,15 +8,15 @@
         </p>
         <div class="mb-6">
           <div class="font-bold">American Brain Tumor Association</div>
-          <a href="https://www.abta.org">https://www.abta.org</a>
+          <a href="https://www.abta.org" class="break-words">https://www.abta.org</a>
         </div>
         <div class="mb-6">
           <div class="font-bold">National Brain Tumor Society Support</div>
-          <a href="https://braintumor.org">https://braintumor.org</a>
+          <a href="https://braintumor.org" class="break-words">https://braintumor.org</a>
         </div>
         <div class="mb-6">
           <div class="font-bold">American Cancer Society</div>
-          <a href="https://www.cancer.org/treatment/caregivers.html">https://www.cancer.org/treatment/caregivers.html</a>
+          <a href="https://www.cancer.org/treatment/caregivers.html" class="break-words">https://www.cancer.org/treatment/caregivers.html</a>
         </div>
       </div>
       <div class="flex justify-center md:justify-end md:w-1/4">

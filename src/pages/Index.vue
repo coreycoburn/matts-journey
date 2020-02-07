@@ -9,10 +9,10 @@
       <div class="flex flex-col-reverse w-full items-center text-blue-500 lg:flex-col lg:w-1/2">
         <div class="flex flex-row mb-12 items-center">
           <div class="flex w-1/2 justify-start">
-            <img src="/images/field_of_hope_logo.jpg" alt="Field of Hope logo" />
+            <img src="/images/field_of_hope_logo.jpg" alt="Field of Hope logo" class="self-center" />
           </div>
           <div class="flex w-1/2 justify-end">
-            <img src="/images/brain_cancer_awareness_ribbon.jpg" alt="Brain Cancer Awareness ribbon" />
+            <img src="/images/brain_cancer_awareness_ribbon.jpg" alt="Brain Cancer Awareness ribbon" class="self-center" />
           </div>
         </div>
         <div class="flex flex-col items-center mb-6 lg:mb-0">
